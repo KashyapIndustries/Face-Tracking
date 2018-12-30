@@ -1,0 +1,30 @@
+What to do if you screw up and uninstall raspberry pi and how to get cv2 running again.
+
+Hello Amogh, I assume you were being a stupid idiot and somehow screwed the whole pi and had to redownload it.
+
+Well I'm here to tell you how. First I want you to go to Idle, Hover over file and click path browsers.
+I want you to click as many of the pluses you can see, mainley the folders. Then i want you to create a new "python" file.
+
+Go to terminal and do this:
+paste "sudo raspi-config" and go down and select "Interfacing Options". From here, go to camera and enable it. Reboot after this/
+
+
+After rebooting, go to terminal and paste these two:
+sudo apt-get install python-opencv
+sudo pip install imutils
+
+Now cv2 and sometihing else is installed:)
+
+
+Then to make sure camera is working and connected do this: 
+raspistill -o cam.jpg
+
+Then download the files:
+"facedetect.py" and the"harcascade_frontalface_default.xmlone and put them in your Python folder. Ten go to this folder by using the command "cd Python'.
+
+Then I want you to follow this format for any other files you want to run:
+
+python facedetect.py haarcascade_frontalface_default.xml
+
+This basically tells python to run both the programs facedetect and haarcascade. There can be one program or many more programs, but
+it has to follow this format.
