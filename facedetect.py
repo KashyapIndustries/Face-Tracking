@@ -62,6 +62,50 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     flags = cv2.cv.CV_HAAR_SCALE_IMAGE
     )
 
+    # show the frame
+    cv2.imshow("Frame", image)
+    key = cv2.waitKey(1) & 0xFF
+
+
+    if User_first == 0 and len(faces) == 1:
+	User_first=1
+        print("Face Found")
+	pygame.mixer.init()
+	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.play()
+	while pygame.mixer.music.get_busy() == True:
+    	    continue
+	pygame.mixer.init()
+	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.play()
+	while pygame.mixer.music.get_busy() == True:
+    	    continue
+
+    if User_first == 1 and len(faces) == 1:
+	print("Good Job Looking at the road")
+
+
+
+    if User_first == 1 and len(faces) == 0:
+        User_first=0
+        print("Face Lost")
+	pygame.mixer.init()
+	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.play()
+	while pygame.mixer.music.get_busy() == True:
+    	    continue
+
+    if User_first == 0 and len(faces) == 0:
+        print("Face Not Found, Please Look at road")
+	pygame.mixer.init()
+	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.play()
+	while pygame.mixer.music.get_busy() == True:
+    	    continue
+
+
+
+
 
     # Draw a rectangle around the faces
     for (x,y,w,h) in faces:
