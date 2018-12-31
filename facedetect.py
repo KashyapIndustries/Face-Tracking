@@ -36,7 +36,7 @@ lastTime = time.time()*1000.0
 
 
 #Sets the person as not being in frame
-User_first=0
+User_first=2
 
 
 
@@ -67,42 +67,58 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     key = cv2.waitKey(1) & 0xFF
 
 
-    if User_first == 0 and len(faces) == 1:
+    if User_first == 2 and len(faces) == 1:
 	User_first=1
-        print("Face Found")
+        print("Face Recognized")
 	pygame.mixer.init()
-	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.load("slow-spring-board.mp3")
 	pygame.mixer.music.play()
 	while pygame.mixer.music.get_busy() == True:
     	    continue
-	pygame.mixer.init()
-	pygame.mixer.music.load("unsure.mp3")
-	pygame.mixer.music.play()
-	while pygame.mixer.music.get_busy() == True:
-    	    continue
+    # show the frame
+    cv2.imshow("Frame", image)
+
+
+    if User_first == 0 and len(faces) == 1:
+	print("Face Found")
+	User_first=1
+
+    # show the frame
+    cv2.imshow("Frame", image)
+
 
     if User_first == 1 and len(faces) == 1:
 	print("Good Job Looking at the road")
 
+
+    # show the frame
+    cv2.imshow("Frame", image)
 
 
     if User_first == 1 and len(faces) == 0:
         User_first=0
         print("Face Lost")
 	pygame.mixer.init()
-	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.load("open-ended.mp3")
 	pygame.mixer.music.play()
 	while pygame.mixer.music.get_busy() == True:
     	    continue
+
+
+    # show the frame
+    cv2.imshow("Frame", image)
+
 
     if User_first == 0 and len(faces) == 0:
         print("Face Not Found, Please Look at road")
 	pygame.mixer.init()
-	pygame.mixer.music.load("unsure.mp3")
+	pygame.mixer.music.load("to-the-point.mp3")
 	pygame.mixer.music.play()
 	while pygame.mixer.music.get_busy() == True:
     	    continue
 
+    # show the frame
+    cv2.imshow("Frame", image)
 
 
 
@@ -116,17 +132,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     # show the frame
     cv2.imshow("Frame", image)
-    key = cv2.waitKey(1) & 0xFF
+
 
      
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
     
+    # show the frame
+    cv2.imshow("Frame", image)
+    key = cv2.waitKey(1) & 0xFF
+
     # if the `q` key was pressed, break from the loop
-    if key == ord("q"):
+    if key == ord("e"):
         break
         
-cap.release()
+
 cv2.destroyAllWindows()
         
 
