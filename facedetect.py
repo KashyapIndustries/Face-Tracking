@@ -104,7 +104,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     	minSize=(30, 30),
     	flags = cv2.cv.CV_HAAR_SCALE_IMAGE
     	)
+	cv2.imshow("Frame", image)
 	time.sleep(2)
+	cv2.imshow("Frame", image)
 	if User_first == 1 and len(faces) == 0:
 		User_first=0
         	print("Face Lost")
