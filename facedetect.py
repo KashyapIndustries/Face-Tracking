@@ -96,13 +96,23 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 
     if User_first == 1 and len(faces) == 0:
-        User_first=0
-        print("Face Lost")
-	pygame.mixer.init()
-	pygame.mixer.music.load("open-ended.mp3")
-	pygame.mixer.music.play()
-	while pygame.mixer.music.get_busy() == True:
-    	    continue
+	cv2.imshow("Frame", image)
+    	faces = faceCascade.detectMultiScale(
+    	gray,
+    	scaleFactor=1.01,
+    	minNeighbors=5,
+    	minSize=(30, 30),
+    	flags = cv2.cv.CV_HAAR_SCALE_IMAGE
+    	)
+	time.sleep(2)
+	if User_first == 1 and len(faces) == 0:
+		User_first=0
+        	print("Face Lost")
+		pygame.mixer.init()
+		pygame.mixer.music.load("open-ended.mp3")
+		pygame.mixer.music.play()
+		while pygame.mixer.music.get_busy() == True:
+    		    continue
 
 
     # show the frame
