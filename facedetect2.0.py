@@ -25,9 +25,9 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-camera.resolution = (480, 320)
+camera.resolution = (1080, 1920)
 camera.framerate = 32
-rawCapture = PiRGBArray(camera, size=(480, 320))
+rawCapture = PiRGBArray(camera, size=(1080, 1920))
 
 
 
@@ -42,7 +42,6 @@ User_first=2
 L=2
 T=0
 e=0
-
 
 
 # capture frames from the camera
@@ -63,9 +62,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     flags = cv2.cv.CV_HAAR_SCALE_IMAGE
     )
 
-    # show the frame
-    cv2.imshow("Frame", image)
-    key = cv2.waitKey(1) & 0xFF
 
     #Sets the face as first being Recognized
     if User_first == 2 and len(faces) == 1:
@@ -76,16 +72,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 	pygame.mixer.music.play()
 	while pygame.mixer.music.get_busy() == True:
     	    continue
-    # show the frame
-    cv2.imshow("Frame", image)
+
 
 
     if User_first == 0 and len(faces) == 1:
         print("Face Found")
         User_first=1
 
-    # show the frame
-    cv2.imshow("Frame", image)
 
 
     if User_first == 1 and len(faces) == 1:
@@ -93,16 +86,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         L=0
 
 
-    # show the frame
-    cv2.imshow("Frame", image)
-
 
     if User_first == 1 and len(faces) == 0:
-        cv2.imshow("Frame", image)
-
-    	cv2.imshow("Frame", image)
-    	time.sleep(2)
-    	cv2.imshow("Frame", image)
+    	time.sleep(1)
 
 	if User_first == 1 and len(faces) == 0:
 		User_first=0
@@ -113,9 +99,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 		while pygame.mixer.music.get_busy() == True:
     		    continue
 
-
-    # show the frame
-    cv2.imshow("Frame", image)
 
 
     if User_first == 0 and len(faces) == 0:
@@ -141,21 +124,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         os.system('python Sendemail.py')
         T=0
 
-    # show the frame
-    cv2.imshow("Frame", image)
-
-
-
-
-    # Draw a rectangle around the faces
-    for (x,y,w,h) in faces:
-        img1=cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
-        roi_gray = gray[y:y+h, x:x+w]
-        roi_color = image[y:y+h, x:x+w]
-
-
-    # show the frame
-    cv2.imshow("Frame", image)
 
 
 
@@ -163,13 +131,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     rawCapture.truncate(0)
 
     # show the frame
-    cv2.imshow("Frame", image)
     key = cv2.waitKey(1) & 0xFF
 
     # if the `q` key was pressed, break from the loop
     if key == ord("q"):
         break
-	camera.stop_preview()
 
 
 cv2.destroyAllWindows()
